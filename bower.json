@@ -1,0 +1,29 @@
+{
+  "name": "angular-phonebook-example",
+  "version": "0.0.1",
+  "homepage": "https://github.com/aramalipoor/angular-phonebook-example",
+  "authors": [
+    "aramalipoor <aram.alipoor@gmail.com>"
+  ],
+  "description": "A lovely phonebook example using AngularJS",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "phonebook"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.8",
+    "bootstrap": "~3.3.1",
+    "angular-md5": "~0.1.7"
+  }
+}

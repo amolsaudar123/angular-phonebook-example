@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+
+    <script type="text/javascript" src="../bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="../bower_components/angular-md5/angular-md5.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+
+    <title>Phonebook Application</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+        #contact-list .phonebook-item .button-remove {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #contact-list .phonebook-item:hover .button-remove {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body ng-app="phonebook">
+
+<div class="container">
+    <div class="row" ng-controller="PhonebookCtrl">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-body form-horizontal payment-form">
+                    <form ng-submit="addItem()">
+                        <div class="form-group">
+                            <label for="fullname" class="col-sm-3 control-label">Fullname</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="fullname" name="fullname" ng-model="newItem.fullname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" required="" id="email" name="email" ng-model="newItem.email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-9">
+                                <input type="tel" class="form-control" id="phone" name="phone" ng-model="newItem.phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12 text-right">
+                                <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Add
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading c-list">
+                    <span class="title">Contacts</span>
+                </div>
+
+                <ul class="list-group" id="contact-list">
+                    <li class="list-group-item" ng-show="book.length == 0">
+                        <div class="alert alert-info">No item</div>
+                    </li>
+                    <li class="phonebook-item list-group-item" ng-repeat="item in book track by $index">
+                        <div class="col-xs-12 col-sm-3">
+                            <img src="http://www.gravatar.com/avatar/{{ item.email | gravatar }}" class="img-responsive img-circle" />
+                        </div>
+                        <div class="col-xs-12 col-sm-9">
+                            <button class="button-remove btn btn-sm btn-danger pull-right" ng-click="removeItem(item)">Remove</button>
+
+                            <span class="h3" ng-bind="item.fullname"></span><br/>
+
+                            <span class="glyphicon glyphicon-envelope text-muted"></span>
+                            <span class="text-muted" ng-bind="item.email"></span><br/>
+
+                            <span class="glyphicon glyphicon-earphone text-muted"></span>
+                            <span class="text-muted" ng-bind="item.phone"></span><br/>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
