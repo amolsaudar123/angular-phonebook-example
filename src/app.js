@@ -1,8 +1,8 @@
 angular.module('phonebook', [
     'angular-md5'
 ])
-    .controller('PhonebookCtrl', function($scope) {
-        $scope.book = [];
+    .controller('PhonebookCtrl', function($scope, PhonebookFactory) {
+        $scope.book = PhonebookFactory.load();
 
         $scope.newItem = {
             fullname: 'Ahmad Rabie',
@@ -20,6 +20,33 @@ angular.module('phonebook', [
 
         $scope.removeItem = function (item) {
             $scope.book.splice($scope.book.indexOf(item), 1);
+        };
+
+        $scope.$watch('book', function () {
+            PhonebookFactory.save($scope.book);
+        }, true);
+    })
+
+    .factory('PhonebookFactory', function ($q) {
+        'use strict';
+
+        var STORAGE_ID = 'vendora-book';
+
+        function _getFromLocalStorage() {
+            return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+        }
+
+        function _saveToLocalStorage(notes) {
+            localStorage.setItem(STORAGE_ID, JSON.stringify(notes));
+        }
+
+        return {
+            save: function (items) {
+                _saveToLocalStorage(items);
+            },
+            load: function () {
+                return _getFromLocalStorage();
+            }
         };
     })
 ;
